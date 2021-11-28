@@ -18,10 +18,10 @@ def check_sql_requests_action_by_one():
 	check_exist = _sqlite.sql_row_names("test_db")
 	for i in check_exist:
 		if i[2]=='well_to_know':
+			name='Bot'
 			f = open(path.path+'template_what_you_can.html', 'r')
 			html=f.read()
-			time_o=(datetime.now() + timedelta(days=+1)).strftime('%d.%m.%y %H:%M')
-			html = html.replace('{_data_}', time_o)
+			html = html.replace('{_data_}', name)
 			_email2.send_email('что я могу', html, adresses_from (i[5]))
 			_sqlite.delete_data_sql("test_db", 'data_last_modify', i[3])
 		if i[2]=='remind':
